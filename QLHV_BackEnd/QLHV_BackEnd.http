@@ -1,0 +1,6 @@
+@QLHV_BackEnd_HostAddress = http://localhost:5264
+
+GET {{QLHV_BackEnd_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
