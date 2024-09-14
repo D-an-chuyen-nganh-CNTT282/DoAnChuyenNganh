@@ -57,6 +57,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 // Life cycle DI: AddSingleton(), AddTransient(), AddScoped()
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IIncomingDocumentRepository, IncomingDocumentRepository>();
 
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
