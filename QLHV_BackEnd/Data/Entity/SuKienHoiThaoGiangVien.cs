@@ -1,0 +1,24 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace QLHV_BackEnd.Data.Entity
+{
+    public class SuKienHoiThaoGiangVien
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int SuKienId { get; set; }
+
+        public required string TenSuKien { get; set; }
+
+        public DateTime NgayToChuc { get; set; }
+
+        public required string DiaDiem { get; set; }
+
+        public string? MoTa { get; set; }
+
+        public int GiangVienId { get; set; }
+
+        public virtual GiangVien GiangVien { get; set; } = null!;
+    }
+}
