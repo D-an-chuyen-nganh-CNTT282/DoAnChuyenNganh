@@ -18,8 +18,10 @@ namespace QLHV_BackEnd.Data.Entity
         public DateTime NgayKetThuc { get; set; }
 
         public required string DanhGia { get; set; }
+        [ForeignKey("DoanhNghiepId")]
 
         public virtual DoanhNghiep DoanhNghiep { get; set; } = null!;
+        [ForeignKey("SinhVienId")]
 
         public virtual SinhVien SinhVien { get; set; } = null!;
     }

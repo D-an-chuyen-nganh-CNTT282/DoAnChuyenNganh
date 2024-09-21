@@ -22,7 +22,8 @@ namespace QLHV_BackEnd.Migrations
                     ChuyenMon = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     KeHoachGiangDay = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     KeHoachNghienCuu = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CongTac = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CongTac = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LinkWebCaNhan = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -279,6 +280,7 @@ namespace QLHV_BackEnd.Migrations
                 {
                     DoanhNghiepId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    GiangVienId = table.Column<int>(type: "int", nullable: false),
                     TenDoanhNghiep = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoDienThoai = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -288,6 +290,12 @@ namespace QLHV_BackEnd.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DoanhNghiep", x => x.DoanhNghiepId);
+                    table.ForeignKey(
+                        name: "FK_DoanhNghiep_GiangVien_GiangVienId",
+                        column: x => x.GiangVienId,
+                        principalTable: "GiangVien",
+                        principalColumn: "GiangVienId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DoanhNghiep_User_NhanVienId",
                         column: x => x.NhanVienId,
@@ -444,7 +452,8 @@ namespace QLHV_BackEnd.Migrations
                     NhanVienId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TinhTrangXuLy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgayGuiYeuCau = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NgayHoanTat = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    NgayHoanTat = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FileScanUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -553,13 +562,13 @@ namespace QLHV_BackEnd.Migrations
                         column: x => x.DoanhNghiepId,
                         principalTable: "DoanhNghiep",
                         principalColumn: "DoanhNghiepId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_QuanLyThucTap_SinhVien_SinhVienId",
                         column: x => x.SinhVienId,
                         principalTable: "SinhVien",
                         principalColumn: "SinhVienId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -624,6 +633,11 @@ namespace QLHV_BackEnd.Migrations
                 name: "IX_CuuSinhVien_NhanVienId",
                 table: "CuuSinhVien",
                 column: "NhanVienId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DoanhNghiep_GiangVienId",
+                table: "DoanhNghiep",
+                column: "GiangVienId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DoanhNghiep_NhanVienId",

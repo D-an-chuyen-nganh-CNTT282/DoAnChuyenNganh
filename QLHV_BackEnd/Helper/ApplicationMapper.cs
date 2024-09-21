@@ -9,6 +9,7 @@ namespace QLHV_BackEnd.Helper
         public ApplicationMapper()
         {
             CreateMap<ApplicationUser, UserModel>().ReverseMap();
+            CreateMap<UserModel, UserReponseDTO>().ReverseMap();
         }
     }
 }

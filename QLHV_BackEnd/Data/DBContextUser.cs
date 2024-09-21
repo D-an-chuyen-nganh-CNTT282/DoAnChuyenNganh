@@ -75,6 +75,19 @@ namespace QLHV_BackEnd.Data
                 .WithMany() // Không cần thuộc tính điều hướng ngược lại trong CongTy
                 .HasForeignKey(cs => cs.CongTyId)
                 .OnDelete(DeleteBehavior.Restrict); // Tránh cascade xóa gây ra nhiều đường dẫn cascade
+                                                    // Quan hệ với bảng SinhVien
+            builder.Entity<QuanLyThucTap>()
+                .HasOne(q => q.SinhVien)
+                .WithMany(s => s.QuanLyThucTaps)
+                .HasForeignKey(q => q.SinhVienId)
+                .OnDelete(DeleteBehavior.Restrict); // Hoặc DeleteBehavior.NoAction
+
+            // Quan hệ với bảng DoanhNghiep
+            builder.Entity<QuanLyThucTap>()
+                .HasOne(q => q.DoanhNghiep)
+                .WithMany(d => d.QuanLyThucTaps)
+                .HasForeignKey(q => q.DoanhNghiepId)
+                .OnDelete(DeleteBehavior.Restrict); // Hoặc DeleteBehavior.NoAction
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

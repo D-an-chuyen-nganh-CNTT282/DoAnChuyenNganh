@@ -25,6 +25,7 @@ namespace QLHV_BackEnd.Data.Entity
         public required float DiemTB { get; set; }
 
         public int GiangVienId { get; set; }
+        [ForeignKey("GiangVienId")]
 
         public virtual GiangVien GiangVien { get; set; } = null!;
 

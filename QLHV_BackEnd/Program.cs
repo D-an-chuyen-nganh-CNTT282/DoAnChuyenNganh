@@ -46,17 +46,8 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
-// cấu hình cors cho phép cổng 3000 kết nối
-var MyAllowSpecificOrigins = "AllowSpecificOrigins";
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(MyAllowSpecificOrigins,
-        builder => builder.WithOrigins("http://localhost:3000")
-                          .AllowAnyHeader()
-                          .AllowAnyMethod()
-                          .AllowCredentials());
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
-});
 // khai báo dịch vụ Context, kết nối đến sql server
 builder.Services.AddDbContext<DBContextUser>(options =>
 {

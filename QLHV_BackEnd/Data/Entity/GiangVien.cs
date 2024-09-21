@@ -20,6 +20,8 @@ namespace QLHV_BackEnd.Data.Entity
         public required string KeHoachNghienCuu { get; set; }
 
         public required string CongTac { get; set; }
+        public string? LinkWebCaNhan { get; set; } //Lưu link giáo án, bài viết,...
+
 
         public virtual ICollection<CuuSinhVien> CuuSinhViens { get; set; } = new List<CuuSinhVien>();
 
@@ -28,5 +30,6 @@ namespace QLHV_BackEnd.Data.Entity
         public virtual ICollection<SinhVien> SinhViens { get; set; } = new List<SinhVien>();
 
         public virtual ICollection<SuKienHoiThaoGiangVien> SuKienHoiThaoGiangViens { get; set; } = new List<SuKienHoiThaoGiangVien>();
+        public virtual ICollection<DoanhNghiep> DoanhNghieps { get; set; } = new List<DoanhNghiep>();
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using QLHV_BackEnd.Data;
 using QLHV_BackEnd.Data.Entity;
 using QLHV_BackEnd.Helper;
@@ -51,7 +53,6 @@ namespace QLHV_BackEnd.Service
                 }
                 await userManager.AddToRoleAsync(newUser, AppRole.GiaoVuKhoa);
             }
-
             return result;
         }
         public async Task<int> UpdateUser(string id, UserModel userModel)
@@ -77,6 +78,16 @@ namespace QLHV_BackEnd.Service
             _context.Users.Remove(user);
             int rowChange = await _context.SaveChangesAsync();
             return rowChange;
+        }
+        public async Task<IList<UserModel>> GetAllUsers()
+        {
+            return await _context.Users
+                .Select(u => new UserModel
+                {
+                    UserName = u.UserName,
+                    Email = u.Email,
+                    PhoneNumber = u.PhoneNumber,
+                }).ToListAsync();
         }
     }
 }

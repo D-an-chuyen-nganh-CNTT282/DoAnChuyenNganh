@@ -20,6 +20,7 @@ namespace QLHV_BackEnd.Data.Entity
         public DateTime NgayGuiYeuCau { get; set; }
 
         public DateTime NgayHoanTat { get; set; }
+        public required string FileScanUrl { get; set; }
         [ForeignKey("NhanVienId")]
         public ApplicationUser NhanVien { get; set; }
 

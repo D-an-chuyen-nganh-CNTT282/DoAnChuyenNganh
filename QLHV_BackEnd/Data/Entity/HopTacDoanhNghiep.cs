@@ -16,6 +16,7 @@ namespace QLHV_BackEnd.Data.Entity
         public required string TinhTrangDuAn { get; set; }
 
         public string? KetQuaHopTac { get; set; }
+        [ForeignKey("DoanhNghiepId")]
 
         public virtual DoanhNghiep DoanhNghiep { get; set; } = null!;
     }

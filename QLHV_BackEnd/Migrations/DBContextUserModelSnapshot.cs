@@ -444,6 +444,9 @@ namespace QLHV_BackEnd.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("GiangVienId")
+                        .HasColumnType("int");
+
                     b.Property<string>("NhanVienId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -457,6 +460,8 @@ namespace QLHV_BackEnd.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DoanhNghiepId");
+
+                    b.HasIndex("GiangVienId");
 
                     b.HasIndex("NhanVienId");
 
@@ -489,6 +494,9 @@ namespace QLHV_BackEnd.Migrations
 
                     b.Property<string>("KeHoachNghienCuu")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkWebCaNhan")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NgaySinh")
@@ -790,6 +798,10 @@ namespace QLHV_BackEnd.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("YeuCauId"));
 
+                    b.Property<string>("FileScanUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LoaiYeuCau")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -960,11 +972,19 @@ namespace QLHV_BackEnd.Migrations
 
             modelBuilder.Entity("QLHV_BackEnd.Data.Entity.DoanhNghiep", b =>
                 {
+                    b.HasOne("QLHV_BackEnd.Data.Entity.GiangVien", "GiangVien")
+                        .WithMany("DoanhNghieps")
+                        .HasForeignKey("GiangVienId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("QLHV_BackEnd.Data.Entity.ApplicationUser", "NhanVien")
                         .WithMany()
                         .HasForeignKey("NhanVienId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GiangVien");
 
                     b.Navigation("NhanVien");
                 });
@@ -1026,13 +1046,13 @@ namespace QLHV_BackEnd.Migrations
                     b.HasOne("QLHV_BackEnd.Data.Entity.DoanhNghiep", "DoanhNghiep")
                         .WithMany("QuanLyThucTaps")
                         .HasForeignKey("DoanhNghiepId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("QLHV_BackEnd.Data.Entity.SinhVien", "SinhVien")
                         .WithMany("QuanLyThucTaps")
                         .HasForeignKey("SinhVienId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("DoanhNghiep");
@@ -1109,6 +1129,8 @@ namespace QLHV_BackEnd.Migrations
             modelBuilder.Entity("QLHV_BackEnd.Data.Entity.GiangVien", b =>
                 {
                     b.Navigation("CuuSinhViens");
+
+                    b.Navigation("DoanhNghieps");
 
                     b.Navigation("LichGiangDays");
 

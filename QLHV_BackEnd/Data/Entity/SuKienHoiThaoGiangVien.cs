@@ -18,7 +18,7 @@ namespace QLHV_BackEnd.Data.Entity
         public string? MoTa { get; set; }
 
         public int GiangVienId { get; set; }
-
+        [ForeignKey("GiangVienId")]
         public virtual GiangVien GiangVien { get; set; } = null!;
     }
 }

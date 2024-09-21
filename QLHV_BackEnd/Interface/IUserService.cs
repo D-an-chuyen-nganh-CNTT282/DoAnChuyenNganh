@@ -10,6 +10,7 @@ namespace QLHV_BackEnd.Interface
         Task<IdentityResult> CreateUser(RegisterModel registerModel);
         Task<int> UpdateUser(string id, UserModel userModel);
         Task<int> DeleteUser(string id);
+        Task<IList<UserModel>> GetAllUsers();
 
     }
 }
