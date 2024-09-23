@@ -15,11 +15,6 @@ namespace QLHV_BackEnd.Data.Entity
 
         public required string ChuyenMon { get; set; }
 
-        public required string KeHoachGiangDay { get; set; }
-
-        public required string KeHoachNghienCuu { get; set; }
-
-        public required string CongTac { get; set; }
         public string? LinkWebCaNhan { get; set; } //Lưu link giáo án, bài viết,...
 
 
@@ -31,5 +26,6 @@ namespace QLHV_BackEnd.Data.Entity
 
         public virtual ICollection<SuKienHoiThaoGiangVien> SuKienHoiThaoGiangViens { get; set; } = new List<SuKienHoiThaoGiangVien>();
         public virtual ICollection<DoanhNghiep> DoanhNghieps { get; set; } = new List<DoanhNghiep>();
+        public virtual ICollection<KeHoachGiangVien> KeHoachGiangViens { get; set; } = new List<KeHoachGiangVien>();
     }
 }

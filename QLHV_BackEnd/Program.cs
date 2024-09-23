@@ -83,6 +83,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 //Khai báo Interface & Service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IGiangVienService, GiangVienService>();
 
 var app = builder.Build();
 

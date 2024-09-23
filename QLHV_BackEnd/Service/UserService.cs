@@ -7,7 +7,7 @@ using QLHV_BackEnd.Data;
 using QLHV_BackEnd.Data.Entity;
 using QLHV_BackEnd.Helper;
 using QLHV_BackEnd.Interface;
-using QLHV_BackEnd.Model;
+using QLHV_BackEnd.Model.UserModel;
 
 namespace QLHV_BackEnd.Service
 {
@@ -16,14 +16,12 @@ namespace QLHV_BackEnd.Service
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly IMapper _mapper;
         private readonly DBContextUser _context;
-        public UserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager, IMapper mapper, DBContextUser context)
+        public UserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager, DBContextUser context)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.signInManager = signInManager;
-            _mapper = mapper;
             _context = context;
         }
         public async Task GetUserByEmailToRegister(string email)
@@ -62,8 +60,8 @@ namespace QLHV_BackEnd.Service
             {
                 return 0;
             }
+            user.HoTen = userModel.HoTen;
             user.PhoneNumber = userModel.PhoneNumber;
-            user.PasswordHash = userModel.PasswordHash;
             _context.Users.Update(user);
             int rowChange = await _context.SaveChangesAsync();
             return rowChange;
@@ -84,6 +82,7 @@ namespace QLHV_BackEnd.Service
             return await _context.Users
                 .Select(u => new UserModel
                 {
+                    HoTen = u.HoTen,
                     UserName = u.UserName,
                     Email = u.Email,
                     PhoneNumber = u.PhoneNumber,

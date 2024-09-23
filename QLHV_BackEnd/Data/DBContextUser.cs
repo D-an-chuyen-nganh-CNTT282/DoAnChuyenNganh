@@ -26,6 +26,7 @@ namespace QLHV_BackEnd.Data
         public DbSet<SuKienDoanhNghiep> SuKienDoanhNghiep { get; set; }
         public DbSet<SuKienHoiThaoGiangVien> SuKienHoiThaoGiangVien { get; set; }
         public DbSet<YeuCauSinhVien> YeuCauSinhVien { get; set; }
+        public DbSet<KeHoachGiangVien> KeHoachGiangVien { get; set; }
         public DBContextUser(DbContextOptions<DBContextUser> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -57,6 +58,7 @@ namespace QLHV_BackEnd.Data
             builder.Entity<SuKienDoanhNghiep>();
             builder.Entity<SuKienHoiThaoGiangVien>();
             builder.Entity<YeuCauSinhVien>();
+            builder.Entity<KeHoachGiangVien>();
 
             // Cấu hình khóa chính tổng hợp cho CongTyCuuSinhVien
             builder.Entity<CongTyCuuSinhVien>()

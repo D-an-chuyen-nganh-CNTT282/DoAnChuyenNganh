@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace QLHV_BackEnd.Model
+namespace QLHV_BackEnd.Model.UserModel
 {
     public class LoginModel
     {

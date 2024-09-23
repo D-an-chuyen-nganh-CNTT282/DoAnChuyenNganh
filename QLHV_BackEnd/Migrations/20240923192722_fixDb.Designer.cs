@@ -12,8 +12,8 @@ using QLHV_BackEnd.Data;
 namespace QLHV_BackEnd.Migrations
 {
     [DbContext(typeof(DBContextUser))]
-    [Migration("20240921133549_DbInit")]
-    partial class DbInit
+    [Migration("20240923192722_fixDb")]
+    partial class fixDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -483,19 +483,7 @@ namespace QLHV_BackEnd.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CongTac")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("HoTen")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("KeHoachGiangDay")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("KeHoachNghienCuu")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -587,6 +575,30 @@ namespace QLHV_BackEnd.Migrations
                     b.HasIndex("DoanhNghiepId");
 
                     b.ToTable("HopTacDoanhNghiep");
+                });
+
+            modelBuilder.Entity("QLHV_BackEnd.Data.Entity.KeHoachGiangVien", b =>
+                {
+                    b.Property<int>("KeHoachId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KeHoachId"));
+
+                    b.Property<string>("GhiChu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GiangVienId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("KeHoachId");
+
+                    b.HasIndex("GiangVienId");
+
+                    b.ToTable("KeHoachGiangVien");
                 });
 
             modelBuilder.Entity("QLHV_BackEnd.Data.Entity.LichGiangDay", b =>
@@ -1025,6 +1037,17 @@ namespace QLHV_BackEnd.Migrations
                     b.Navigation("DoanhNghiep");
                 });
 
+            modelBuilder.Entity("QLHV_BackEnd.Data.Entity.KeHoachGiangVien", b =>
+                {
+                    b.HasOne("QLHV_BackEnd.Data.Entity.GiangVien", "GiangVien")
+                        .WithMany("KeHoachGiangViens")
+                        .HasForeignKey("GiangVienId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GiangVien");
+                });
+
             modelBuilder.Entity("QLHV_BackEnd.Data.Entity.LichGiangDay", b =>
                 {
                     b.HasOne("QLHV_BackEnd.Data.Entity.GiangVien", "GiangVien")
@@ -1134,6 +1157,8 @@ namespace QLHV_BackEnd.Migrations
                     b.Navigation("CuuSinhViens");
 
                     b.Navigation("DoanhNghieps");
+
+                    b.Navigation("KeHoachGiangViens");
 
                     b.Navigation("LichGiangDays");
 

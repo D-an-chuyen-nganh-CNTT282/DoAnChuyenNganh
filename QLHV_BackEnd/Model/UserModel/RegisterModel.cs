@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace QLHV_BackEnd.Model
+namespace QLHV_BackEnd.Model.UserModel
 {
     public class RegisterModel
     {
         [Required(ErrorMessage = "Họ tên không được để trống")]
-        public string HoTen {  get; set; }
+        public string HoTen { get; set; }
         [Required(ErrorMessage = "Email không được để trống")]
         [EmailAddress(ErrorMessage = "Email không đúng định dạng")]
         public string Email { get; set; }

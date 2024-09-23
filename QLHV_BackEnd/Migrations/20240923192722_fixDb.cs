@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QLHV_BackEnd.Migrations
 {
     /// <inheritdoc />
-    public partial class DbInit : Migration
+    public partial class fixDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,9 +20,6 @@ namespace QLHV_BackEnd.Migrations
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ChuyenMon = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    KeHoachGiangDay = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    KeHoachNghienCuu = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CongTac = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LinkWebCaNhan = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -81,6 +78,27 @@ namespace QLHV_BackEnd.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "KeHoachGiangVien",
+                columns: table => new
+                {
+                    KeHoachId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GiangVienId = table.Column<int>(type: "int", nullable: false),
+                    NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_KeHoachGiangVien", x => x.KeHoachId);
+                    table.ForeignKey(
+                        name: "FK_KeHoachGiangVien_GiangVien_GiangVienId",
+                        column: x => x.GiangVienId,
+                        principalTable: "GiangVien",
+                        principalColumn: "GiangVienId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -660,6 +678,11 @@ namespace QLHV_BackEnd.Migrations
                 column: "DoanhNghiepId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_KeHoachGiangVien_GiangVienId",
+                table: "KeHoachGiangVien",
+                column: "GiangVienId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LichGiangDay_GiangVienId",
                 table: "LichGiangDay",
                 column: "GiangVienId");
@@ -764,6 +787,9 @@ namespace QLHV_BackEnd.Migrations
 
             migrationBuilder.DropTable(
                 name: "HopTacDoanhNghiep");
+
+            migrationBuilder.DropTable(
+                name: "KeHoachGiangVien");
 
             migrationBuilder.DropTable(
                 name: "LichGiangDay");

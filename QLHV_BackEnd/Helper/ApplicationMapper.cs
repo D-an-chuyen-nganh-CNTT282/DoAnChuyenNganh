@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using QLHV_BackEnd.Data.Entity;
-using QLHV_BackEnd.Model;
+using QLHV_BackEnd.Model.UserModel;
 
 namespace QLHV_BackEnd.Helper
 {
@@ -9,7 +9,6 @@ namespace QLHV_BackEnd.Helper
         public ApplicationMapper()
         {
             CreateMap<ApplicationUser, UserModel>().ReverseMap();
-            CreateMap<UserModel, UserReponseDTO>().ReverseMap();
         }
     }
 }

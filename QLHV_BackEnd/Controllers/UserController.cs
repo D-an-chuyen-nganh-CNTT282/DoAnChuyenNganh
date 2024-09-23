@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using QLHV_BackEnd.Data;
 using QLHV_BackEnd.Interface;
-using QLHV_BackEnd.Model;
+using QLHV_BackEnd.Model.UserModel;
 
 namespace QLHV_BackEnd.Controllers
 {

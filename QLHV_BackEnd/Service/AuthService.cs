@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using QLHV_BackEnd.Data.Entity;
 using QLHV_BackEnd.Interface;
-using QLHV_BackEnd.Model;
+using QLHV_BackEnd.Model.UserModel;
 using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
