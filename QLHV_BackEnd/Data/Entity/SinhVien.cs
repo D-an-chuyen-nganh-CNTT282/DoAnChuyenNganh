@@ -12,6 +12,7 @@ namespace QLHV_BackEnd.Data.Entity
         public required string HoTen { get; set; }
 
         public DateTime NgaySinh { get; set; }
+        public required string GioiTinh { get; set; }
 
         public required string DiaChi { get; set; }
 
