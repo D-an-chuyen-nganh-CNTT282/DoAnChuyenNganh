@@ -9,7 +9,9 @@ namespace QLHV_BackEnd.Data.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int KeHoachId { get; set; }
         public int GiangVienId { get; set; }
-        public string? NoiDung {  get; set; }
+        public required string NoiDung {  get; set; }
+        public DateTime NgayBatDau { get; set; }
+        public DateTime? NgayKetThuc {  get; set; }
         public string? GhiChu { get; set; }
         [ForeignKey("GiangVienId")]
         public virtual GiangVien GiangVien { get; set; } = null!;

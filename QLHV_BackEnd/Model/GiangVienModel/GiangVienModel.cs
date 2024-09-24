@@ -8,6 +8,7 @@
         public DateTime NgaySinh { get; set; }
 
         public required string ChuyenMon { get; set; }
+
         public string? LinkWebCaNhan { get; set; } //Lưu link giáo án, bài viết,...
     }
 }

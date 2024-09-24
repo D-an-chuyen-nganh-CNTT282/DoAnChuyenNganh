@@ -84,6 +84,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IGiangVienService, GiangVienService>();
+builder.Services.AddScoped<ILichGiangDayService, LichGiangDayService>();
 
 var app = builder.Build();
 
